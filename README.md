@@ -17,3 +17,15 @@ Besides, the application is deployed on [Now](https://zeit.co/now): https://sock
 ``` query
 CREATE DATABASE `chatDB` DEFAULT CHARACTER SET = `utf8mb4`;
 ```
+
+# DB 설정파일 추가
+``` json
+{
+  "host": "DB 경로",
+  "port": "DB port",
+  "username": "DB 유저 ID",
+  "password": "DB 유저 비밀번호",
+  "database": "DB 명",
+  "logging": true // sequelize query 로깅 옵션
+}
+```
