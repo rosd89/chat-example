@@ -33,3 +33,7 @@ npm install
 npm run build
 npm start
 ```
+
+# 내용
+* 회원가입 및 로그인 기능
+* 채팅기능
