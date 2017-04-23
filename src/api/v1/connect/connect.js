@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const connectCtrl = require('./connect.controller');
 
-const auth = require('../util/authorize.checker');
+const auth = require('../util/authorize.checker').authCheckByExpress;
 
 // client salt 가져오기
 router.get('/salt', connectCtrl.getClientSalt);
@@ -11,6 +11,6 @@ router.get('/salt', connectCtrl.getClientSalt);
 router.post('/', connectCtrl.loginValidation, connectCtrl.create);
 
 // 로그아웃
-router.delete('/', auth.authCheck, connectCtrl.destroy);
+router.delete('/', auth, connectCtrl.destroy);
 
 module.exports = router;

@@ -5,13 +5,29 @@ const getHash = (pass, salt) => crypto.pbkdf2Sync(pass, salt, 10000, 32, 'sha256
 const defaultPath = '/api/v1';
 const userPath = `${defaultPath}/users`;
 const connectPath = `${defaultPath}/connections`;
+const messagePath = `${defaultPath}/messages`;
+
+const pageOptions = {
+    page: 0,
+    limit: 30,
+};
 
 $(function () {
-    const socket = io()
+    const socket = io();
 
     $('form').submit(_ => {
-        socket.emit('chat message', $('#m').val());
+        if (!sessionStorage.getItem('accessToken')) {
+            return false;
+        }
+
+        socket.emit('chat message', {
+            accessToken: sessionStorage.getItem('accessToken'),
+            userId: sessionStorage.getItem('userId'),
+            userName: sessionStorage.getItem('userName'),
+            message: $('#m').val()
+        });
         $('#m').val('');
+
         return false;
     });
 
@@ -29,7 +45,7 @@ $(function () {
                 })
             })
             .then(_ => {
-               alert('회원가입이 완료되었습니다.');
+                alert('회원가입이 완료되었습니다.');
                 location.reload();
             });
     });
@@ -47,13 +63,38 @@ $(function () {
                 })
             })
             .then(result => {
-                localStorage.setItem('accessToken', result.data.accessToken);
+                console.log(result.data);
+                sessionStorage.setItem('userId', result.data.userId);
+                sessionStorage.setItem('userName', result.data.userName);
+                sessionStorage.setItem('accessToken', result.data.accessToken);
+
+                pageOptions.accessToken = sessionStorage.getItem('accessToken');
             })
+            .then(_ => http.get(messagePath, pageOptions))
+            .then(result => {
+                $('#sineBlock').css('display', 'none');
+                $('#messageBlock').css('display', 'block');
+
+                for (const message of result.data.reverse()) {
+                    $('#messages').append($('<li>').text(`[${message.userName}][${message.createdAt}] : ${message.chatMessage}`));
+                }
+            });
     });
 
-    socket.on('chat message', msg => {
-        $('#messages').append($('<li>').text(msg));
+    // 메시지 전송 완료
+    socket.on('chat message', message => {
+        if (!sessionStorage.getItem('accessToken')) {
+            return false;
+        }
+
+        $('#messages').append($('<li>').text(`[${message.userName}][${message.createdAt}] : ${message.chatMessage}`));
         window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    // 인증 만료
+    socket.on('Error Unauthorized', msg => {
+        alert('로그인을 다시 해주세요.');
+        location.reload();
     });
 
     $('.form').find('input, textarea').on('keyup blur focus', function (e) {

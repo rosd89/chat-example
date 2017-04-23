@@ -17,9 +17,11 @@ app.get('/', function (req, res) {
 
 const user = require('./api/v1/user/user');
 const connect = require('./api/v1/connect/connect');
+const message = require('./api/v1/message/message');
 
 app.use('/api/v1/users', user);
 app.use('/api/v1/connections', connect);
+app.use('/api/v1/messages', message);
 
 // 404 Not Found
 app.use((req, res) => error404NotFound(res));

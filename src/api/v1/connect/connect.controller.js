@@ -59,6 +59,7 @@ exports.loginValidation = (req, res, next) => {
         const hash2nd = hash.getHash(hash1st, serverSalt);
         if (hashToken !== hash2nd) return retMsg.error401Unauthorized(res);
 
+        req.body.connectUserName = user.userName;
         next();
 
         return null;
@@ -82,7 +83,9 @@ exports.create = (req, res) => UserConnectInfo.destroy({
     accessToken: hash.getSalt(),
     expiredTime: hash.getExpiredTime()
 })).then(connect => retMsg.success200RetObj(res, {
-    accessToken: connect.accessToken
+    accessToken: connect.accessToken,
+    userId: req.body.userId,
+    userName: req.body.connectUserName
 })).catch(err => retMsg.error500Server(res, {
     err: err
 }));

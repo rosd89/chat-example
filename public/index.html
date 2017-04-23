@@ -10,12 +10,11 @@
     <ul id="messages"></ul>
 
     <form action="">
-        <input id="m" autocomplete="off"/>
+        <input id="m" autocomplete="off" style="display: inline; color:black"/>
         <button>Send</button>
     </form>
 </div>
-
-<div id="logInBlock">
+<div id="sineBlock">
     <div class="form">
 
         <ul class="tab-group">
@@ -25,56 +24,52 @@
 
         <div class="tab-content">
             <div id="login">
-                <form action="/" method="post">
-                    <div class="field-wrap">
-                        <label>
-                            ID<span class="req">*</span>
-                        </label>
-                        <input id="inId" type="text" required autocomplete="off"/>
-                    </div>
+                <div class="field-wrap">
+                    <label>
+                        ID<span class="req">*</span>
+                    </label>
+                    <input id="inId" type="text" required autocomplete="off"/>
+                </div>
 
-                    <div class="field-wrap">
-                        <label>
-                            Password<span class="req">*</span>
-                        </label>
-                        <input id="inPass" type="password" required autocomplete="off"/>
-                    </div>
-                    <input id="sineInBtn" type="button" class="button button-block" value="Log In"/>
-                </form>
+                <div class="field-wrap">
+                    <label>
+                        Password<span class="req">*</span>
+                    </label>
+                    <input id="inPass" type="password" required autocomplete="off"/>
+                </div>
+                <input id="sineInBtn" type="button" class="button button-block" value="Log In"/>
             </div>
             <div id="signup">
-                <form action="/" method="post">
-                    <div class="field-wrap">
-                        <label>
-                            ID<span class="req">*</span>
-                        </label>
-                        <input id="upId" type="text" required autocomplete="off"/>
-                    </div>
+                <div class="field-wrap">
+                    <label>
+                        ID<span class="req">*</span>
+                    </label>
+                    <input id="upId" type="text" required autocomplete="off"/>
+                </div>
 
-                    <div class="field-wrap">
-                        <label>
-                            이름<span class="req">*</span>
-                        </label>
-                        <input id="upName" type="text" required autocomplete="off"/>
-                    </div>
+                <div class="field-wrap">
+                    <label>
+                        이름<span class="req">*</span>
+                    </label>
+                    <input id="upName" type="text" required autocomplete="off"/>
+                </div>
 
-                    <div class="field-wrap">
-                        <label>
-                            Set A Password<span class="req">*</span>
-                        </label>
-                        <input id="upPass" type="password" required autocomplete="off"/>
-                    </div>
+                <div class="field-wrap">
+                    <label>
+                        Set A Password<span class="req">*</span>
+                    </label>
+                    <input id="upPass" type="password" required autocomplete="off"/>
+                </div>
 
-                    <input id="sineUpBtn" type="button" class="button button-block" value="Get Started"/>
-                </form>
+                <input id="sineUpBtn" type="button" class="button button-block" value="Get Started"/>
             </div>
         </div>
     </div>
 </div>
+</div>
 
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="https://rawgit.com/tomyun/crypto-js/xeit-3.1.2/build/rollups/pbkdf2.js"></script>
 <script src="bundle.js"></script>
 </body>
 </html>

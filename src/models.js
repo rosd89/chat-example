@@ -5,9 +5,11 @@ const db = require('./model/mysql.connection');
  */
 const UserInfo = require('./model/userInfo');
 const UserConnectInfo = require('./model/userConnectInfo');
+const MessageInfo = require('./model/messageInfo');
 
 module.exports = {
     db,
     UserInfo,
-    UserConnectInfo
+    UserConnectInfo,
+    MessageInfo
 };
