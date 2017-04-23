@@ -20,10 +20,6 @@ io.on('connection', socket => {
         })
         .then(message => io.emit('chat message', message))
         .catch(err => io.emit('Error Unauthorized', err)));
-
-    // socket.on('chat message', msg => {
-    //     io.emit('chat message', msg);
-    // });
 });
 
 http.listen(port, () => {
