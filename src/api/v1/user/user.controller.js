@@ -40,10 +40,10 @@ exports.create = (req, res) => {
     } = req.body;
 
     if (!hashToken) {
-        return retMsg.error400InvalidCall(res, 'ERROR_MISSING_PARAM', 'hash');
+        return retMsg.error400InvalidCall(res, 'ERROR_MISSING_PARAM', 'hashToken');
     }
     else if (hashToken.length === '64') {
-        return retMsg.error400InvalidCall(res, 'ERROR_INVALID_PARAM', 'hash');
+        return retMsg.error400InvalidCall(res, 'ERROR_INVALID_PARAM', 'hashToken');
     }
 
     UserInfo.findOne({

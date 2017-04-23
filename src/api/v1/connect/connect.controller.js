@@ -40,11 +40,11 @@ exports.getClientSalt = (req, res) => {
  */
 exports.loginValidation = (req, res, next) => {
     const userId = req.body.userId;
-    const hash1st = req.body.hash;
+    const hash1st = req.body.hashToken;
 
     if (!userId) return retMsg.error400InvalidCall(req, 'ERROR_MISSING_PARAM', 'userId');
-    else if (!hash1st) return retMsg.error400InvalidCall(req, 'ERROR_MISSING_PARAM', 'hash');
-    else if (hash1st.length !== 64) return retMsg.error400InvalidCall(req, 'ERROR_INVALID_PARAM', 'hash');
+    else if (!hash1st) return retMsg.error400InvalidCall(req, 'ERROR_MISSING_PARAM', 'hashToken');
+    else if (hash1st.length !== 64) return retMsg.error400InvalidCall(req, 'ERROR_INVALID_PARAM', 'hashToken');
 
     UserInfo.findOne({
         where: {
@@ -86,30 +86,6 @@ exports.create = (req, res) => UserConnectInfo.destroy({
 })).catch(err => retMsg.error500Server(res, {
     err: err
 }));
-
-/**
- *  로그인 갱신 controller
- *
- * @param req
- * @param res
- */
-exports.update = (req, res) => UserConnectInfo.findOne({
-    where: {
-        userId: req.body.userId,
-    }
-}).then(connection => {
-    if (!connection) return retMsg.error400InvalidCall(res, 'ERROR_NO_CONNECTION');
-
-    // 인증정보 추가
-    connection.accessToken = hash.getSalt();
-    connection.expiredTime = hash.getExpiredTime();
-
-    connection.save().then(_ => retMsg.success200RetObj(res, {
-        accessToken: accessToken
-    })).catch(err => retMsg.error500Server(res, {
-        err: err
-    }));
-});
 
 /**
  * 로그아웃 controller

@@ -48,10 +48,6 @@ form button {
     margin-bottom: 40px
 }
 
-#messageBlock{
-    display: none;
-}
-
 *, *:before, *:after {
     box-sizing: border-box;
 }
@@ -223,4 +219,8 @@ textarea {
 .forgot {
     margin-top: -20px;
     text-align: right;
+}
+
+#messageBlock{
+    display: none;
 }

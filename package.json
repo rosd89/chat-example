@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "my first socket.io app",
   "dependencies": {
+    "axios": "^0.16.1",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "mysql": "^2.13.0",
@@ -11,6 +12,7 @@
     "socket.io": "^1.7.3"
   },
   "scripts": {
-    "start": "node bin/www.js"
+    "start": "node bin/www.js",
+    "build": "webpack"
   }
 }
