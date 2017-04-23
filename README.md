@@ -1,9 +1,16 @@
+# 작업환경
+* node : v6.9.2
+* mysql : 5.7
+* 기타 - package.json 참조
+
 # 1. database 생성
 ``` query
 CREATE DATABASE `chatDB` DEFAULT CHARACTER SET = `utf8mb4`;
 ```
 
 # 2. DB 설정파일 추가
+* 경로 : `config/db.config.json`
+* 내용 : 
 ``` json
 {
   "host": "DB 경로",
